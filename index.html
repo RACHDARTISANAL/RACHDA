@@ -3,58 +3,593 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RACHDA — Artisanat authentique. Objets faits main inspirés des traditions, revisités avec modernité." />
   <title>RACHDA — Artisanat Authentique</title>
+
+  <!-- Logo en favicon (simple) -->
+  <link rel="icon" type="image/png" href="logo-rachda.png" />
+
+  <style>
+    :root{
+      /* Noir / Blanc / Doré */
+      --bg:#0b0b0d;
+      --panel:#101014;
+      --text:#f7f7f5;
+      --muted:#c8c8c3;
+      --line:rgba(255,255,255,.14);
+      --gold:#c9a24d;
+      --gold2:#e3c77a;
+
+      --radius:22px;
+      --max:1180px;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(201,162,77,.10), transparent 60%),
+        radial-gradient(820px 520px at 85% 20%, rgba(227,199,122,.08), transparent 55%),
+        var(--bg);
+      line-height:1.65;
+      letter-spacing:.01em;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Bandeau */
+    .topbar{
+      border-bottom:1px solid var(--line);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .topbar .inner{
+      display:flex;
+      justify-content:center;
+      padding:10px 0;
+      text-align:center;
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(11,11,13,.80);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand img{height:44px; width:auto; display:block}
+    .nav-links{display:flex; gap:22px; align-items:center}
+    .nav-links a{color:var(--muted); font-size:14px}
+    .nav-links a:hover{color:var(--gold)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-weight:650;
+      font-size:14px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.22)
+    }
+    .btn.gold{
+      border-color: rgba(201,162,77,.55);
+      background: linear-gradient(135deg, rgba(201,162,77,.38), rgba(227,199,122,.16));
+    }
+    .btn.gold:hover{border-color: rgba(201,162,77,.90)}
+
+    /* HERO */
+    header{padding:56px 0 40px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      min-height: 540px;
+      position:relative;
+    }
+
+    .hero-media{
+      height: 360px;
+      background:
+        radial-gradient(720px 360px at 18% 25%, rgba(201,162,77,.18), transparent 60%),
+        radial-gradient(680px 360px at 78% 35%, rgba(227,199,122,.10), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+    .placeholder{
+      width:min(560px, 92%);
+      aspect-ratio: 16/9;
+      border-radius: 18px;
+      border:1px dashed rgba(255,255,255,.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color: var(--muted);
+      padding:18px;
+      background: rgba(0,0,0,.18);
+    }
+
+    .hero-content{padding:22px 22px 26px}
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color: var(--muted);
+      background: rgba(0,0,0,.18);
+      font-size:13px;
+      width:max-content;
+    }
+    .dot{width:7px;height:7px;border-radius:50%; background: var(--gold)}
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height:1.06;
+      letter-spacing:-.02em;
+      font-weight:800;
+    }
+    .gold-text{color: var(--gold)}
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: 16.5px;
+      max-width: 64ch
+    }
+    .hero-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
+
+    .side{
+      display:grid;
+      gap:18px;
+    }
+    .tile{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 160px;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .tile:hover{transform: translateY(-2px); border-color: rgba(201,162,77,.55)}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .tile h3{margin:12px 0 6px; font-size:18px; font-weight:800}
+    .tile p{margin:0; color: var(--muted); font-size:14px}
+    .tile:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(520px 220px at 20% 20%, rgba(201,162,77,.10), transparent 60%);
+      pointer-events:none;
+    }
+
+    /* Sections */
+    section{padding:72px 0}
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.02em;
+      font-weight:900;
+    }
+    .section-head p{margin:0; color:var(--muted); max-width:72ch}
+
+    /* Catégories */
+    .cats{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
+    .cat{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      min-height: 240px;
+      display:flex;
+      flex-direction:column;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .cat:hover{transform: translateY(-2px); border-color: rgba(201,162,77,.55)}
+    .cat .thumb{
+      height: 140px;
+      background:
+        radial-gradient(520px 260px at 30% 30%, rgba(201,162,77,.14), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 14px;
+      text-align:center;
+    }
+    .cat .body{padding:16px}
+    .cat h3{margin:0 0 6px; font-size:16px; font-weight:900}
+    .cat p{margin:0; color:var(--muted); font-size:13.5px}
+
+    /* Editorial grid */
+    .editorial{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      padding:20px;
+    }
+    .panel h3{margin:0 0 10px; font-size:18px; font-weight:900}
+    .panel p{margin:0; color:var(--muted)}
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:start;
+    }
+    form{display:grid; gap:10px}
+    label{font-size:13px; color:var(--muted)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      outline:none;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(201,162,77,.65)}
+
+    .info{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:18px;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      padding:10px 12px;
+      border-radius: 14px;
+      margin-top:10px;
+    }
+    .row span{color:var(--muted); font-size:13px}
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      padding:34px 0 42px;
+    }
+    .foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr;}
+      .cats{grid-template-columns: 1fr 1fr;}
+      .editorial{grid-template-columns: 1fr;}
+      .contact{grid-template-columns: 1fr;}
+      .nav-links{display:none}
+      .hero-card{min-height: 500px}
+    }
+    @media (max-width: 520px){
+      .cats{grid-template-columns: 1fr;}
+    }
+  </style>
 </head>
 
-<body style="margin:0; background:#0b0b0d; color:#f7f7f5; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; line-height:1.6;">
-  <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:10px 16px; text-align:center; color:#c8c8c3; font-size:13px;">
-    Artisanat responsable • Emballage soigné • Service attentif
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="inner">Artisanat responsable • Emballage soigné • Service attentif</div>
+    </div>
   </div>
 
-  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px; border-bottom:1px solid rgba(255,255,255,.14); position:sticky; top:0; background:rgba(11,11,13,.92); backdrop-filter:blur(10px);">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <img src="logo-rachda.png" alt="RACHDA" style="height:44px; width:auto; display:block;" />
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Accueil RACHDA">
+          <img src="logo-rachda.png" alt="RACHDA" />
+        </a>
+
+        <nav class="nav-links" aria-label="Navigation">
+          <a href="#collections">Collections</a>
+          <a href="#histoire">Notre histoire</a>
+          <a href="#engagements">Engagements</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="btn gold" href="#contact">Commander / Devis</a>
+      </div>
     </div>
-    <a href="#contact" style="border:1px solid #c9a24d; color:#c9a24d; padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:600; font-size:14px;">
-      Commander
-    </a>
   </div>
 
-  <main style="max-width:980px; margin:0 auto; padding:42px 16px;">
-    <h1 style="margin:0 0 10px; font-size:42px; line-height:1.1; font-weight:700;">
-      L’art de vivre <span style="color:#c9a24d;">authentique</span>,<br>
-      habiter l’espace <span style="color:#c9a24d;">autrement</span>.
-    </h1>
-    <p style="margin:0; color:#c8c8c3; font-size:16px; max-width:70ch;">
-      Bienvenue chez <strong>RACHDA</strong>, une marque dédiée à l’artisanat élégant et aux objets qui ont une âme.
-      Des créations faites à la main, inspirées par les traditions ancestrales et revisitées avec une touche moderne.
-    </p>
+  <header id="top">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-card">
+          <div class="hero-media">
+            <div class="placeholder">
+              <strong style="display:block; color:var(--text); margin-bottom:6px">Grande photo “ambiance”</strong>
+              Mets ici une photo lifestyle (céramique + déco / table).<br>
+              Ensuite je te montre comment remplacer par une vraie image.
+            </div>
+          </div>
+          <div class="hero-content">
+            <div class="kicker"><span class="dot"></span> Artisanat • Céramique • Objets qui ont une âme</div>
+            <h1>L’art de vivre <span class="gold-text">authentique</span>,<br>habiter l’espace <span class="gold-text">autrement</span>.</h1>
+            <p class="lead">
+              Bienvenue chez <strong>RACHDA</strong>, une marque dédiée à l’artisanat élégant et aux créations faites à la main,
+              inspirées par les traditions ancestrales et revisitées avec une touche moderne pour sublimer votre quotidien.
+            </p>
+            <div class="hero-cta">
+              <a class="btn gold" href="#collections">Découvrir les collections</a>
+              <a class="btn" href="#contact">Demander une pièce</a>
+            </div>
+          </div>
+        </div>
 
-    <section style="margin-top:34px; border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:18px;">
-      <h2 style="margin:0 0 10px; font-size:20px; color:#c9a24d;">Collections</h2>
-      <ul style="margin:0; padding-left:18px; color:#c8c8c3;">
-        <li>Tasses & mugs</li>
-        <li>Bols</li>
-        <li>Assiettes</li>
-        <li>Vases</li>
-      </ul>
-    </section>
-
-    <section id="contact" style="margin-top:24px; border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:18px;">
-      <h2 style="margin:0 0 10px; font-size:20px; color:#c9a24d;">Contact</h2>
-      <p style="margin:0; color:#c8c8c3;">
-        <strong style="color:#c9a24d;">Email :</strong> hello@rachda.fr<br>
-        <strong style="color:#c9a24d;">Instagram :</strong> @rachda.ceramique
-      </p>
-    </section>
-
-    <div style="margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.14); color:#c8c8c3; text-align:center; font-size:14px;">
-      © <span id="year"></span> RACHDA
+        <div class="side">
+          <div class="tile">
+            <span class="tag">Sélection</span>
+            <h3>Art de la table</h3>
+            <p>Bols, assiettes, tasses : des pièces qui rendent le quotidien plus beau.</p>
+            <div style="margin-top:14px"><a class="btn" href="#collections">Explorer</a></div>
+          </div>
+          <div class="tile">
+            <span class="tag">Déco</span>
+            <h3>Vases & objets sculpturaux</h3>
+            <p>Formes organiques, finitions délicates, teintes naturelles.</p>
+            <div style="margin-top:14px"><a class="btn" href="#contact">Demander un devis</a></div>
+          </div>
+          <div class="tile">
+            <span class="tag">Cadeaux</span>
+            <h3>Pièces à offrir</h3>
+            <p>Une attention authentique : emballage soigné, expérience chaleureuse.</p>
+            <div style="margin-top:14px"><a class="btn" href="#contact">Offrir RACHDA</a></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
+  </header>
+
+  <section id="collections">
+    <div class="container">
+      <div class="section-head">
+        <h2>Collections</h2>
+        <p>Remplace les blocs “Photo” par tes images produits (Vinted/Instagram) + je peux te faire une vraie galerie ensuite.</p>
+      </div>
+
+      <div class="cats">
+        <a class="cat" href="#contact" aria-label="Tasses et mugs">
+          <div class="thumb">Photo : Tasses / Mugs</div>
+          <div class="body">
+            <h3>Tasses & mugs</h3>
+            <p>Petites séries • finitions artisanales</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#contact" aria-label="Bols">
+          <div class="thumb">Photo : Bols</div>
+          <div class="body">
+            <h3>Bols</h3>
+            <p>L’essentiel, mais juste</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#contact" aria-label="Assiettes">
+          <div class="thumb">Photo : Assiettes</div>
+          <div class="body">
+            <h3>Assiettes</h3>
+            <p>Élégance quotidienne • teintes naturelles</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#contact" aria-label="Vases">
+          <div class="thumb">Photo : Vases</div>
+          <div class="body">
+            <h3>Vases</h3>
+            <p>Déco sculpturale • pièces uniques</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="histoire">
+    <div class="container">
+      <div class="section-head">
+        <h2>Notre histoire</h2>
+        <p>
+          RACHDA est née d’une passion profonde pour l’artisanat authentique et les traditions ancestrales.
+          Nous croyons que chaque objet a une âme — façonné par la main d’un artisan, inspiré par des siècles de savoir-faire,
+          et pensé pour sublimer votre quotidien.
+        </p>
+      </div>
+
+      <div class="editorial">
+        <div class="panel">
+          <h3>Une mission simple</h3>
+          <p>Mettre en lumière des créations uniques, faites à la main, qui allient tradition et élégance contemporaine — pour votre intérieur, vos moments de vie et vos cadeaux.</p>
+        </div>
+        <div class="panel">
+          <h3>Un art de vivre plus lent</h3>
+          <p>RACHDA défend un quotidien plus conscient : on préfère peu mais juste. Des objets que l’on utilise, que l’on garde, et qui finissent par faire partie du quotidien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagements">
+    <div class="container">
+      <div class="section-head">
+        <h2>Vision & engagements</h2>
+        <p>Une rencontre entre esthétique, fonctionnalité et héritage culturel — avec une attention portée à chaque détail.</p>
+      </div>
+
+      <div class="editorial">
+        <div class="panel">
+          <h3>🌿 Artisanat responsable</h3>
+          <p>Nous travaillons directement avec des artisans locaux qui perpétuent des techniques traditionnelles pour créer des pièces durables, originales et chargées de sens.</p>
+        </div>
+        <div class="panel">
+          <h3>✨ Qualité & authenticité</h3>
+          <p>Matériaux nobles, finition exceptionnelle, sélection exigeante. Chaque détail compte.</p>
+        </div>
+        <div class="panel">
+          <h3>🕊️ Style & modernité</h3>
+          <p>Des formes classiques réinventées avec une touche contemporaine pour s’intégrer harmonieusement à votre style de vie.</p>
+        </div>
+        <div class="panel">
+          <h3>🤍 Service & expérience</h3>
+          <p>Livraison soignée, service client attentif, emballages élégants (ajuste selon ton organisation).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Commande, devis, collaboration : écris-nous. (Le formulaire ouvre ton application mail via “mailto”.)</p>
+      </div>
+
+      <div class="contact">
+        <div class="panel">
+          <h3>Écrivez-nous</h3>
+
+          <form id="contactForm">
+            <div>
+              <label for="name">Nom</label>
+              <input id="name" name="name" type="text" placeholder="Votre nom" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="vous@exemple.com" required />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Décrivez votre demande (pièce, quantité, délai…)" required></textarea>
+            </div>
+            <button class="btn gold" type="submit">Envoyer</button>
+            <p id="formHint" style="margin:0; color:var(--muted); font-size:13px"></p>
+          </form>
+        </div>
+
+        <aside class="info">
+          <h3>Infos</h3>
+          <p style="margin:0; color:var(--muted)">Remplace ces infos si besoin.</p>
+
+          <div class="row"><span>Email</span><strong>hello@rachda.fr</strong></div>
+          <div class="row"><span>Instagram</span><strong>@rachda.ceramique</strong></div>
+          <div class="row"><span>Commande</span><strong>Sur demande</strong></div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="#collections">Voir les collections</a>
+            <a class="btn gold" href="#top">Retour en haut</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> RACHDA — L’art de vivre authentique</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#" onclick="alert('Ajoute ici tes Mentions légales / Politique de confidentialité.'); return false;">Mentions légales</a>
+          <a class="btn" href="#" onclick="alert('Ajoute ici tes CGV si tu vends en ligne.'); return false;">CGV</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('contactForm');
+    const hint = document.getElementById('formHint');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent('Demande via le site RACHDA');
+      const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+
+      const to = 'hello@rachda.fr'; // change si besoin
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      hint.textContent = "Votre application mail va s’ouvrir pour envoyer le message.";
+      form.reset();
+    });
   </script>
 </body>
 </html>
